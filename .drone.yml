@@ -4,7 +4,7 @@ pipeline:
     environment:
       - PORT=4000
     commands:
-      - apt-get -y update && apt-get -y upgrade
+      - apt-get -y update && apt-get -y upgrade && apt-get -y install libc6-udeb libtinfo-dev
       - cd front && yarn install && yarn build
 
 guide:
