@@ -1,0 +1,16 @@
+pipeline:
+  build:
+    image: kkarczmarczyk/node-yarn:6.9-wheezy
+    environment:
+      - PORT=4000
+    commands:
+      - yarn install
+      - yarn build
+
+guide:
+  name: Elm, Webpack and Drone
+  desc: >
+    Example project to build Elm App with Drone
+  labels:
+    - Elm
+    - Webpack
