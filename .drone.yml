@@ -4,7 +4,8 @@ pipeline:
     environment:
       - PORT=4000
     commands:
-      - cd front && yarn install && yarn && yarn build
+      - npm i -g elm
+      - cd front && yarn install && yarn build
 
 guide:
   name: Elm, Webpack and Drone
