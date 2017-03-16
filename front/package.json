@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "nf start",
     "api": "cd ../server/; npm start",
     "build": "webpack",
     "client": "webpack-dev-server --port 3000"
-},
-
+  },
   "license": "MIT",
   "dependencies": {
     "ace-css": "1.1",
@@ -15,6 +15,7 @@
     "elm-webpack-loader": "^4.2.0",
     "file-loader": "^0.10.1",
     "font-awesome": "4",
+    "foreman": "^2.0.0",
     "style-loader": "^0.14.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
