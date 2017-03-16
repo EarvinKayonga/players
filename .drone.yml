@@ -4,6 +4,7 @@ pipeline:
     environment:
       - PORT=4000
     commands:
+      - apt-get update && apt-get upgrade
       - cd front && yarn install && yarn build
 
 guide:
