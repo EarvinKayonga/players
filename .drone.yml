@@ -4,7 +4,6 @@ pipeline:
     environment:
       - PORT=4000
     commands:
-      - npm i -g elm
       - cd front && yarn install && yarn build
 
 guide:

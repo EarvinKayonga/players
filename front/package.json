@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nf start",
     "api": "cd ../server/; npm start",
+    "prebuild" : "npm install -g elm",
     "build": "webpack",
     "client": "webpack-dev-server --port 3000"
   },
