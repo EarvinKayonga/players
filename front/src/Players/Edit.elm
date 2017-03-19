@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (class, value, href)
 import Msgs exposing (Msg)
 import Models exposing (Player)
+import Routing exposing (playersPath)
 
 
 
@@ -17,7 +18,7 @@ view model =
 nav : Player -> Html Msg
 nav model =
     div [ class "clearfix mb2 white bg-black p1" ]
-        []
+        [ listBtn ]
 
 form : Player -> Html Msg
 form player =
@@ -48,3 +49,13 @@ btnLevelIncrease : Player -> Html Msg
 btnLevelIncrease player =
     a [ class "btn ml1 h1" ]
         [ i [ class "fa fa-minus-circle" ] [] ]
+
+
+listBtn : Html Msg
+listBtn =
+    a
+        [ class "btn regular"
+        , href playersPath
+        ]
+        [ i [ class "fa fa-chevron-left mr1" ] [], text "List" ]
+
