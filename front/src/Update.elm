@@ -1,10 +1,11 @@
 module Update exposing (..)
 
-import Commands exposing (savePlayerCmd)
+import Commands exposing (savePlayerCmd, createPlayerCmd)
 import Msgs exposing (Msg)
 import Models exposing (Model, Player)
 import RemoteData
 import Routing exposing (parseLocation)
+
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -31,6 +32,20 @@ update msg model =
         Msgs.OnPlayerSave (Err error) ->
             ( model, Cmd.none )
 
+        Msgs.NewPlayersName name ->
+            let 
+                newPlayer = Player model.newPlayer.id name model.newPlayer.level
+            in
+            ( { model | newPlayer = newPlayer }, Cmd.none )
+        
+        Msgs.NewPlayersLevel level ->
+            let 
+                newPlayer = Player model.newPlayer.id  model.newPlayer.name (Result.withDefault 1(String.toInt level))
+            in
+            ( { model | newPlayer = newPlayer }, Cmd.none )
+
+        Msgs.SaveNewPlayer player ->
+            ( { model | newPlayer = player }, createPlayerCmd player )
 
 updatePlayer : Model -> Player -> Model
 updatePlayer model updatedPlayer =
@@ -40,11 +55,13 @@ updatePlayer model updatedPlayer =
                 updatedPlayer
             else
                 currentPlayer
+        
 
         updatePlayerList players =
-            List.map pick players
+            List.append (List.map pick players) [ model.newPlayer ]
 
         updatedPlayers =
             RemoteData.map updatePlayerList model.players
+        
     in
         { model | players = updatedPlayers }

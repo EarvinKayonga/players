@@ -11,3 +11,6 @@ type Msg
     | OnLocationChange Location
     | ChangeLevel Player Int
     | OnPlayerSave (Result Http.Error Player)
+    | NewPlayersName String
+    | NewPlayersLevel String
+    | SaveNewPlayer Player

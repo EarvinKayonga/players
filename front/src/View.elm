@@ -16,7 +16,7 @@ page : Model -> Html Msg
 page model =
     case model.route of
         Models.PlayersRoute ->
-            Players.List.view model.players
+            Players.List.view model
         
         Models.PlayerRoute id ->
             playerEditPage model id
