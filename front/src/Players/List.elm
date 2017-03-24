@@ -1,8 +1,8 @@
 module  Players.List exposing (..)
 
-import Players.Create exposing (create)
+import Players.Create exposing (create, deleteBtn)
 import Html exposing (..)
-import Html.Attributes exposing (class, href)
+import Html.Attributes exposing (class, href, title)
 import Msgs exposing (Msg)
 import Models exposing (Player, Model )
 import RemoteData exposing (WebData)
@@ -60,7 +60,7 @@ playerRow player  =
         , td [] [ text player.name ]
         , td [] [ text (toString player.level) ]
         , td []
-            [ editBtn player ]
+            [ (editBtn player), (deleteBtn player) ]
         ]
 
 editBtn : Player -> Html.Html Msg
@@ -72,6 +72,7 @@ editBtn player =
         a
             [ class "btn regular"
             , href path
+            , title "Edit"
             ]
-            [ i [ class "fa fa-pencil mr1" ] [], text "Edit" ]
+            [ i [ class "fa fa-pencil mr1" ] [] ]
 

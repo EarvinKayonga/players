@@ -15,3 +15,5 @@ type Msg
     | NewPlayersLevel String
     | SaveNewPlayer Player
     | OnPlayerCreated (Result Http.Error Player)
+    | DeletePlayer Player
+    | OnPlayerDeleted (Result Http.Error Player)

@@ -1,6 +1,6 @@
 module Update exposing (..)
 
-import Commands exposing (savePlayerCmd, createPlayerCmd)
+import Commands exposing (savePlayerCmd, createPlayerCmd, deletePlayerCmd)
 import Msgs exposing (Msg)
 import Models exposing (Model, Player)
 import RemoteData
@@ -52,6 +52,17 @@ update msg model =
 
         Msgs.SaveNewPlayer player ->
             ( { model | newPlayer = player }, createPlayerCmd player )
+        
+        Msgs.DeletePlayer player ->
+            ( model, deletePlayerCmd player )
+        
+        Msgs.OnPlayerDeleted (Ok player) ->
+            ( rmFromPlayers model player, Cmd.none )
+        
+        Msgs.OnPlayerDeleted (Err error) ->
+            ( model, Cmd.none )
+        
+
 
 updatePlayer : Model -> Player -> Model
 updatePlayer model updatedPlayer =
@@ -88,3 +99,26 @@ addToPlayers  model addedPlayer =
             RemoteData.map updatePlayerList model.players
     in
         { model | players = updatedPlayers }
+
+
+rmFromPlayers : Model -> Player -> Model
+rmFromPlayers model rmedPlayer =
+    let
+        pick currentPlayer =
+            if rmedPlayer.id == currentPlayer.id then
+                rmedPlayer
+            else
+                currentPlayer
+
+        updatePlayerList players =
+            (List.map pick players)
+            |> List.filter(isNotPlayer rmedPlayer) 
+
+        updatedPlayers =
+            RemoteData.map updatePlayerList model.players
+    in
+        { model | players = updatedPlayers }
+
+isNotPlayer : Player -> Player -> Bool 
+isNotPlayer player p = 
+    player.id == p.id

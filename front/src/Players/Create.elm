@@ -2,7 +2,7 @@ module  Players.Create exposing (..)
 
 import Html.Attributes exposing (class)
 import Html exposing (..)
-import Html.Attributes exposing (class, placeholder, type_)
+import Html.Attributes exposing (class, placeholder, type_, title)
 import Html.Events exposing (onInput, onClick)
 import Msgs exposing (Msg(..))
 import Models exposing (Model, Player, latestId)
@@ -21,12 +21,24 @@ create model players =
 createBtn : Model -> String -> Html Msg
 createBtn model id =
     let
-      player =  Player id model.newPlayer.name model.newPlayer.level
-      message = SaveNewPlayer player
+        player =  Player id model.newPlayer.name model.newPlayer.level
+        message = SaveNewPlayer player
     in
-      a 
-        [ class "btn regular"
-        , onClick message 
-        ]
-        [ i [ class "fa fa-plus mr1" ] [], text "Create" ]
+        a 
+            [ class "btn regular"
+            , onClick message 
+            ]
+            [ i [ class "fa fa-plus mr1" ] [], text "Create" ]
 
+
+deleteBtn : Player ->  Html Msg
+deleteBtn player =
+    let
+        message = DeletePlayer player
+    in
+        a
+            [ class "btn btn-regular"
+            , onClick message
+            , title "Delete"
+            ]
+            [ i [ class "fa fa-trash mr1" ] [] ]
