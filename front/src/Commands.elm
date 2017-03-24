@@ -69,7 +69,7 @@ createPlayerRequest player =
 createPlayerCmd : Player -> Cmd Msg 
 createPlayerCmd player =
     createPlayerRequest player
-        |> Http.send Msgs.OnPlayerSave
+        |> Http.send Msgs.OnPlayerCreated
 
 
 playerEncoder : Player -> Encode.Value

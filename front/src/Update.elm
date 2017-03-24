@@ -32,6 +32,12 @@ update msg model =
         Msgs.OnPlayerSave (Err error) ->
             ( model, Cmd.none )
 
+        Msgs.OnPlayerCreated (Ok player) ->
+            ( addToPlayers model player, Cmd.none )
+        
+        Msgs.OnPlayerCreated (Err error) ->
+            ( model, Cmd.none )
+
         Msgs.NewPlayersName name ->
             let 
                 newPlayer = Player model.newPlayer.id name model.newPlayer.level
@@ -58,10 +64,27 @@ updatePlayer model updatedPlayer =
         
 
         updatePlayerList players =
-            List.append (List.map pick players) [ model.newPlayer ]
+            List.map pick players
 
         updatedPlayers =
             RemoteData.map updatePlayerList model.players
         
+    in
+        { model | players = updatedPlayers }
+
+addToPlayers : Model -> Player -> Model
+addToPlayers  model addedPlayer =
+    let
+        pick currentPlayer =
+            if addedPlayer.id == currentPlayer.id then
+                addedPlayer
+            else
+                currentPlayer
+
+        updatePlayerList players =
+            List.append (List.map pick players) [ addedPlayer ]
+
+        updatedPlayers =
+            RemoteData.map updatePlayerList model.players
     in
         { model | players = updatedPlayers }

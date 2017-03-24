@@ -14,3 +14,4 @@ type Msg
     | NewPlayersName String
     | NewPlayersLevel String
     | SaveNewPlayer Player
+    | OnPlayerCreated (Result Http.Error Player)
