@@ -1,9 +1,9 @@
 module Players.Edit exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (class, value, href)
-import Html.Events exposing (onClick)
-import Msgs exposing (Msg)
+import Html.Attributes exposing (class, placeholder, type_, title, value, href)
+import Html.Events exposing (onClick, onInput)
+import Msgs exposing (Msg(..))
 import Models exposing (Player)
 import Routing exposing (playersPath)
 
@@ -24,8 +24,9 @@ nav model =
 form : Player -> Html Msg
 form player =
     div [ class "m3"]
-        [ h1 [] [ text player.name ]
-        , formLevel player
+            [ h1 [] [ text player.name ]
+            , formName player
+            , formLevel player
         ]
 
 formLevel : Player -> Html Msg
@@ -38,6 +39,17 @@ formLevel player =
             [ span [ class "h2 bold" ] [ text (toString player.level)] 
             , btnLevelDecrease player
             , btnLevelIncrease player
+            ]
+        ]
+
+formName : Player -> Html Msg
+formName player =
+    div
+        [ class "clearfix py1"
+        ]
+        [ div [ class "col col-5" ] [ text "Name" ]
+        , div [ class "col col-7" ]
+            [ input [ type_ "text", class "border-none", placeholder player.name, onInput (ChangeName player) ][]
             ]
         ]
 

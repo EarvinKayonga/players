@@ -2,7 +2,7 @@
   "players": [
     {
       "id": "1",
-      "name": "Sally",
+      "name": "Sali",
       "level": 4
     },
     {
@@ -29,11 +29,6 @@
       "id": "6",
       "name": "Jaime",
       "level": 12
-    },
-    {
-      "id": "7",
-      "name": "Nick",
-      "level": 8
     }
   ]
 }

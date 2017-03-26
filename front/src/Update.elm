@@ -19,6 +19,14 @@ update msg model =
                     parseLocation location
             in 
                 ( { model | route = newRoute }, Cmd.none )
+
+        Msgs.ChangeName player name  ->
+            let
+                updatedPlayer =
+                    { player | name = name  }
+            in
+                ( model, savePlayerCmd updatedPlayer )
+
         Msgs.ChangeLevel player howMuch ->
             let
                 updatedPlayer =
