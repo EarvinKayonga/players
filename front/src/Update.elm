@@ -23,7 +23,10 @@ update msg model =
         Msgs.ChangeName player name  ->
             let
                 updatedPlayer =
-                    { player | name = name  }
+                    if (String.length name) > 0 then
+                        { player | name = name  }
+                    else
+                        player
             in
                 ( model, savePlayerCmd updatedPlayer )
 
